@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="SQLite -" uuid="a22db668-6e78-4bae-b537-2fdf68d42b2e">
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+    </data-source>
+    <data-source name="Rails recipe_box: development" uuid="0f6a3deb-d0fb-457c-a989-e525813c26ff" />
+  </component>
+</project>
