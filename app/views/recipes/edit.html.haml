@@ -1,2 +1,9 @@
-%h1 Edit Recipe
-= render 'form'
+- if user_signed_in? && (current_user.id == @recipe.user.id)
+  %h1 Edit Recipe
+  = render 'form'
+-else
+  .row
+    .col-md-10
+      .col-md-offset-6
+        %p='Sorry you can Edit this record.'
+        = link_to 'Home', root_path, class: 'btn btn-default'
