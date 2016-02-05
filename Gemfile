@@ -30,6 +30,7 @@ gem 'better_errors'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'paperclip', '~> 4.3', '>= 4.3.4'
 gem 'hirb'
+gem 'devise', '~> 3.5', '>= 3.5.6'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'cocoon', '~> 1.2', '>= 1.2.7'
