@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby '2.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use sqlite3 as the database for Active Record
@@ -31,11 +31,14 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'paperclip', '~> 4.3', '>= 4.3.4'
 gem 'hirb'
 gem 'devise', '~> 3.5', '>= 3.5.6'
-# Use Unicorn as the app server
-# gem 'unicorn'
 gem 'cocoon', '~> 1.2', '>= 1.2.7'
+gem 'aws-sdk', '~> 2.2', '>= 2.2.14'
+
+# Use Unicorn as the app server
+ gem 'unicorn'
+
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+ gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
