@@ -1,4 +1,6 @@
-= simple_form_for @recipe, html: {multipar: true} do |f|
+=simple_form_for(  @recipe, role: 'form', html: {multipar: true}) do |f|
+
+
   - if @recipe.errors.any?
     #errors
       %p

@@ -1,19 +1,18 @@
 class RecipesController < ApplicationController
-before_action :find_recipe, only: [:show, :update,  :edit, :destroy]
-before_action :authenticate_user!, except:[:index, :show]
+  before_action :find_recipe, only: [:show, :update,  :edit, :destroy]
+  before_action :authenticate_user!, except:[:index, :show,:search]
 
   def index
-
-   @recipe = Recipe.all.order('created_at desc').where.not(title: nil)
-
-    end
+    @recipe ||= Recipe.search(params[:query])
+  end
 
   def show
 
   end
 
   def new
-    @recipe = current_user.recipes.build  #Recipe.new
+    @recipe = current_user.recipes.build  #
+    #@recipe = Recipe.new
   end
 
   def create
@@ -27,22 +26,32 @@ before_action :authenticate_user!, except:[:index, :show]
 
   end
 
-   def edit
+  def edit
 
-   end
-  def update
-   if @recipe.update(recipe_params)
-     redirect_to @recipe
-   else
-     render 'edit'
   end
-   end
+  def update
+    if @recipe.update(recipe_params)
+      redirect_to @recipe
+    else
+      render 'edit'
+    end
+  end
 
   def destroy
     @recipe.destroy
     redirect_to root_path, notice: 'successfully deleted'
   end
 
+  def search
+    if params[:search]
+      # @search = Recipe.search(params[:query])
+      # @query = @search.all
+      @recipe = Recipe.where('lower(title) like ?', "%#{params[:query].downcase}%")
+      render 'index'
+      # else
+      #   render 'index'
+    end
+  end
   private
 
   def find_recipe
@@ -51,7 +60,7 @@ before_action :authenticate_user!, except:[:index, :show]
 
   def recipe_params
     params.require(:recipe).permit(:title, :description, :image,
-                         ingredients_attributes: [:id, :name, :_destroy],
-                         directions_attributes: [:id, :step, :_destroy] )
+                                   ingredients_attributes: [:id, :name, :_destroy],
+                                   directions_attributes: [:id, :step, :_destroy] )
   end
 end

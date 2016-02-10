@@ -10,6 +10,8 @@
     .container
       .navbar-brand= link_to 'Recipe Box', root_path
       %ul.nav.navbar-nav.navbar-right
+        = form_tag recipes_path, :method => 'get' do
+          = text_field_tag 'query', params[:query], placeholder: 'Enter search term...'
         - if user_signed_in?
           %li= link_to 'New Recipe', new_recipe_path
           %li= link_to current_user.email,  ''
