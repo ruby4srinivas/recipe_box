@@ -3,7 +3,16 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, except:[:index, :show,:search]
 
   def index
-    @recipe ||= Recipe.search(params[:query])
+#for simple search
+#@recipe ||= Recipe.simple_search(params[:query])
+#for solr
+    @search = Recipe.search do
+      keywords params[:query]
+      facet(:publish_month)
+      with(:publish_month, params[:month]) if params[:month].present?
+    end
+    @recipe = @search.results
+
   end
 
   def show
@@ -42,16 +51,16 @@ class RecipesController < ApplicationController
     redirect_to root_path, notice: 'successfully deleted'
   end
 
-  def search
-    if params[:search]
-      # @search = Recipe.search(params[:query])
-      # @query = @search.all
-      @recipe = Recipe.where('lower(title) like ?', "%#{params[:query].downcase}%")
-      render 'index'
-      # else
-      #   render 'index'
-    end
-  end
+  # def search
+  #   if params[:search]
+  #     # @search = Recipe.search(params[:query])
+  #     # @query = @search.all
+  #     @recipe = Recipe.where('lower(title) like ?', "%#{params[:query].downcase}%")
+  #     render 'index'
+  #     # else
+  #     #   render 'index'
+  #   end
+  # end
   private
 
   def find_recipe
@@ -59,7 +68,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description, :image,
+    params.require(:recipe).permit(:title, :description, :image, :delete_image,
                                    ingredients_attributes: [:id, :name, :_destroy],
                                    directions_attributes: [:id, :step, :_destroy] )
   end
