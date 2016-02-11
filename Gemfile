@@ -41,7 +41,7 @@ gem 'binding_of_caller'
 # Use Capistrano for deployment
 gem 'rails_12factor'
 gem 'capistrano-rails', group: :development
-gem 'sqlite3'
+
 
 gem 'sunspot_rails'  # for solr search
 gem 'sunspot_solr'   # for solr search
@@ -49,6 +49,7 @@ gem 'progress_bar'   # for terminal progressbar
 gem 'tire' # for elastic search
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'sqlite3'
   gem 'byebug'
 end
 
