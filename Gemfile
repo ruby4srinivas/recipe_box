@@ -4,7 +4,7 @@ ruby '2.2.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -33,14 +33,16 @@ gem 'hirb'
 gem 'devise', '~> 3.5', '>= 3.5.6'
 gem 'cocoon', '~> 1.2', '>= 1.2.7'
 gem 'aws-sdk', '~> 2.2', '>= 2.2.14'
-
+gem 'pg'
 gem 'binding_of_caller'
 # Use Unicorn as the app server
  gem 'unicorn'
 #gem "meta_search"
 # Use Capistrano for deployment
- gem 'capistrano-rails', group: :development
- gem 'rails_12factor'
+gem 'rails_12factor'
+gem 'capistrano-rails', group: :development
+gem 'sqlite3'
+
 gem 'sunspot_rails'  # for solr search
 gem 'sunspot_solr'   # for solr search
 gem 'progress_bar'   # for terminal progressbar
