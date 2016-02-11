@@ -40,7 +40,7 @@ gem 'binding_of_caller'
 #gem "meta_search"
 # Use Capistrano for deployment
  gem 'capistrano-rails', group: :development
-
+ gem 'rails_12factor'
 gem 'sunspot_rails'  # for solr search
 gem 'sunspot_solr'   # for solr search
 gem 'progress_bar'   # for terminal progressbar
