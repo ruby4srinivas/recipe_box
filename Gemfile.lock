@@ -138,6 +138,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    pg (0.18.4)
     pr_geohash (1.0.0)
     progress_bar (1.0.5)
       highline (~> 1.6)
@@ -270,6 +271,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (~> 4.3, >= 4.3.4)
+  pg
   progress_bar
   rails (= 4.2.5.1)
   rails_12factor
