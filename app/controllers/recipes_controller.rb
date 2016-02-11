@@ -5,13 +5,22 @@ class RecipesController < ApplicationController
   def index
 #for simple search
 #@recipe ||= Recipe.simple_search(params[:query])
-#for solr
-    @search = Recipe.search do
-      keywords params[:query]
-      facet(:publish_month)
-      with(:publish_month, params[:month]) if params[:month].present?
-    end
-    @recipe = @search.results
+
+#for solr  it will search any matching word in Recipes , ingredients and directions.
+# as well at the top shows the facets
+
+# @search = Recipe.search do
+#   keywords params[:query]
+#   facet(:publish_month)
+#   with(:publish_month, params[:month]) if params[:month].present?
+# end
+# @recipe = @search.results
+# end of solr
+
+# elastic search
+
+@recipe = Recipe.search(params)
+
 
   end
 

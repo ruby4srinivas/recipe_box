@@ -1,15 +1,26 @@
+// solr search
+-#%h3 Published
+-#
+-#- for row in @search.facet(:publish_month).rows
+-#  %li
+-#    - if params[:month].blank?
+-#      = link_to row.value, month: row.value
+-#      = "(#{row.count})"
+-#    - else
+-#      = row.value
+-#      =link_to 'remove', month: nil
 
-- @recipe.each_slice(3) do |recipes|
-  .row
+.row
+  - @recipe.each_slice(3) do |recipes|
+
     - recipes.each do |recipe|
       .col-md-4
         .recipe
           .image_wrapper
             = link_to recipe do
-              = image_tag recipe.image.url(:medium)
+              = image_tag recipe.image.url(:medium) if recipe.image.present?
           %h4= link_to recipe.title.titleize ,recipe
   //= link_to 'Edit',edit_recipe_path(r)
-
 
 
 
