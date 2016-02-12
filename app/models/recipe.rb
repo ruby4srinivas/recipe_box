@@ -3,8 +3,8 @@ class Recipe < ActiveRecord::Base
   has_many :ingredients
   has_many :directions
 
-  include Tire::Model::Search #elastic Search
-  include Tire::Model::Callbacks #elastic search
+  # include Tire::Model::Search #elastic Search
+  # include Tire::Model::Callbacks #elastic search
 
 
 
@@ -22,42 +22,42 @@ class Recipe < ActiveRecord::Base
   before_validation { image.clear if @delete_image }
 
   #elastic search start
-  def as_indexed_json(options={})
-    as_json(
-        only: [:id, :name, :description],
-        include: [:ingredients],
-        include: [:directions]
-    )
-  end
-
-  def as_indexed_json
-    self.as_json({
-                     only: [:title, :description],
-                     include: {
-                         ingredients: { only: :name },
-                         directions: { only: :step },
-                     }
-                 })
-  end
+  # def as_indexed_json(options={})
+  #   as_json(
+  #       only: [:id, :name, :description],
+  #       include: [:ingredients],
+  #       include: [:directions]
+  #   )
+  # end
+  #
+  # def as_indexed_json
+  #   self.as_json({
+  #                    only: [:title, :description],
+  #                    include: {
+  #                        ingredients: { only: :name },
+  #                        directions: { only: :step },
+  #                    }
+  #                })
+  # end
 
   #elastic search end
 
   #solr search start
-  # searchable do
-  #   text :description
-  #   text :ingredients do
-  #     ingredients.map( &:name )
-  #   end
-  #   text :directions do
-  #     directions.map(&:step)
-  #   end
-  #   time :created_at
-  #   string :publish_month
-  # end
-  #
-  # def publish_month
-  #   created_at.strftime("%B %Y")
-  # end
+  searchable do
+    text :description
+    text :ingredients do
+      ingredients.map( &:name )
+    end
+    text :directions do
+      directions.map(&:step)
+    end
+    time :created_at
+    string :publish_month
+  end
+
+  def publish_month
+    created_at.strftime("%B %Y")
+  end
   #solr search end
   def delete_image
     @delete_image ||= false
@@ -66,13 +66,14 @@ class Recipe < ActiveRecord::Base
   def delete_image=(value)
     @delete_image  = !value.to_i.zero?
   end
+#elastic
 
-  def self.search(params)
-    tire.search(load: true) do
-      query {string params[:query]} if params[:query].present?
-    end
-
-  end
+  # def self.search(params)
+  #   tire.search(load: true) do
+  #     query {string params[:query]} if params[:query].present?
+  #   end
+  #
+  # end
   protected
 
   def self.simple_search(query)
